@@ -1,0 +1,32 @@
+{
+  "name": "@ui.js.org/ui-js-esbuild-plugin-example",
+  "version": "0.0.0",
+  "description": "ui.js 0.7.x stage 1 experimental tags bundling with esbuild",
+  "main": "ui-js-esbuild.js",
+  "scripts": {
+    "build":                "node build.client.js",
+    "dev:build-client":     "./node_modules/.bin/nodemon --watch src  --watch build.client.js build.client.js --ext js,tag,css",
+    "dev:start-web-server": "./node_modules/.bin/browser-sync start -s -w --directory --startPath ./public/index.html",
+    "start":                "./node_modules/.bin/run-p dev:*"
+  },
+  "keywords": [
+    "ui",
+    "dom",
+    "virtualdom",
+    "reactive",
+    "eue",
+    "esbuild"
+  ],
+  "author": "Dmitry Vasilev",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "esbuild": "^0.20.1",
+    "nodemon": "^3.1.0",
+    "npm-run-all": "^4.1.5",
+    "@ui.js.org/ui-js-stage-1-esbuild-plugin": "^0.0.3"
+  },
+  "dependencies": {
+    "@ui.js.org/ui": "^0.0.0"
+  }
+}

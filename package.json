@@ -1,0 +1,33 @@
+{
+  "name": "@ui.js.org/ui-js-stage-1-esbuild-plugin",
+  "version": "0.0.3",
+  "description": "ui.js stage 1 experimental tags bundling with esbuild",
+  "main": "ui-js-esbuild-plugin.js",
+  "dependencies": {
+    "@ui.js.org/ui": "^0.0.0",
+    "esbuild": "^0.20.1",
+    "glob": "^8.1.0",
+    "minimatch": "^9.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ui-js-org/ui-js-stage-1-esbuild-plugin"
+  },
+  "keywords": [
+    "ui",
+    "dom",
+    "virtualdom",
+    "reactive",
+    "eue",
+    "esbuild"
+  ],
+  "author": "Dmitry Vasilev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/caracal7/ui.js/issues"
+  },
+  "homepage": "https://github.com/caracal7/ui.js#readme"
+}

@@ -1,6 +1,6 @@
 {
   "name": "@ui.js.org/ui-js-stage-1-esbuild-plugin",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "ui.js stage 1 experimental tags bundling with esbuild",
   "main": "ui-js-esbuild-plugin.js",
   "dependencies": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ui-js-org/ui-js-stage-1-esbuild-plugin"
+    "url": "https://github.com/ui-js-org/ui-js-stage-1-esbuild-plugin"
   },
   "keywords": [
     "ui",

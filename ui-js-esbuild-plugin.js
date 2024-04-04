@@ -82,7 +82,7 @@ const uiPlugin = async (opts) => {
     return {
         name: namespace,
         setup(build) {
-            build.onResolve({ filter: new RegExp(`^${namespace}:`) }, args => ({ path: args.path.substring(5, args.path.length) }));
+            build.onResolve({ filter: new RegExp(`^${namespace}:`) }, args => ({ path: args.path.substring(19, args.path.length) }));
 
             build.onResolve({ filter: new RegExp(`^${namespace}$`) }, args => ({ path: args.path, namespace: `${namespace}-ns` }));
 

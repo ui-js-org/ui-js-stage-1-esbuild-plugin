@@ -1,5 +1,6 @@
 // version 0.0.0
 
+const _PATH_ = require('path');
 const { GlobSync } = require('glob');
 const { minimatch } = require('minimatch');
 const fs = require('fs').promises;
@@ -8,19 +9,26 @@ const { compile, VERSION } = require('@ui.js.org/ui');
 
 
 const uiPlugin = async (opts) => {
-    console.log('ui.js 0.7.x experimental bundler');
-    console.log('ui.js version 🛠: ', VERSION);
-    console.log('ui.js tags path: ', opts.path);
+
     const namespace = opts.namespace || 'ui.js-bundled-tags';
 
-    const files = GlobSync(opts.path + '/**/*.tag', {
-        ignore: opts.ignore ? opts.path + opts.ignore : undefined
+
+    const PATH = _PATH_.resolve(__dirname + '/' + opts.path);
+
+    const files = GlobSync(PATH + '/**/*.tag', {
+        ignore: opts.ignore ? PATH + opts.ignore : undefined
     }).found;
+
+    console.log('ui.js 0.7.x experimental bundler');
+    console.log('ui.js version 🛠: ', VERSION);
+    console.log('ui.js tags path: ', PATH);
+
+//    console.log(PATH, __dirname + '/' + PATH, _PATH_.resolve(__dirname + '/' + PATH))
 
     const tags = [];
     await Promise.all(files.map(async url => {
         const source = await fs.readFile(url, 'utf8');
-        const path = url.substr(opts.path.length);
+        const path = url.substr(PATH.length);
         tags.push({
             source,
             path,
@@ -36,28 +44,28 @@ const uiPlugin = async (opts) => {
                 source: tag.source,
                 path: tag.path,
                 keepName: tag.keepName,
-                nodePath: opts.path,
-                BASE_URL: opts.path,
+                nodePath: PATH,
+                BASE_URL: PATH,
                 nodeFetch: async (path) => {
                     if(path[0] === '/') {
                         try {
-                            return await fs.readFile(opts.path + path, 'utf8');
+                            return await fs.readFile(PATH + path, 'utf8');
                         } catch (e) {
-                            const msg = `ui.js ❤️  ERROR loading "${opts.path + path}" for tag ${tag.path}`+"\n"+`${e.message}`;
+                            const msg = `🛑🛑🛑🛑🛑 ui.js ❤️  ERROR loading "${PATH + path}" for tag ${tag.path}`+"\n"+`${e.message} 🛑🛑🛑🛑🛑`;
                             console.log(e.message);
                             throw msg;
                         }
                     } else { // 2 rewrite!!!
                         try {
-                            return await fs.readFile(opts.path + '/' + path, 'utf8');
+                            return await fs.readFile(PATH + '/' + path, 'utf8');
                         } catch (e) {
-                            const msg = `ui.js ❤️  ERROR loading "${opts.path + '/' + path}" for tag ${tag.path}`+"\n"+`${e.message}`;
+                            const msg = `🛑🛑🛑🛑🛑 ui.js ❤️  ERROR loading "${PATH + '/' + path}" for tag ${tag.path}`+"\n"+`${e.message} 🛑🛑🛑🛑🛑`;
                             console.log(e.message);
                             throw msg;
                         }
                     }
 
-                    throw `nodeFetch: ${opts.path+' '+path} unknown issue!`;
+                    throw `nodeFetch: ${PATH+' '+path} unknown issue!`;
                 }
             });
             console.log(`ui.js compile: ${tag.path} | <${name}>`);
@@ -82,7 +90,9 @@ const uiPlugin = async (opts) => {
     return {
         name: namespace,
         setup(build) {
-            build.onResolve({ filter: new RegExp(`^${namespace}:`) }, args => ({ path: args.path.substring(19, args.path.length) }));
+            build.onResolve({ filter: new RegExp(`^${namespace}:`) }, args => {
+                return ({ path: args.path.substring(19, args.path.length) })
+            });
 
             build.onResolve({ filter: new RegExp(`^${namespace}$`) }, args => ({ path: args.path, namespace: `${namespace}-ns` }));
 

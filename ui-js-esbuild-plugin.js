@@ -13,7 +13,7 @@ const uiPlugin = async (opts) => {
     const namespace = opts.namespace || 'ui.js-bundled-tags';
 
 
-    const PATH = _PATH_.resolve(__dirname + '/' + opts.path);
+    const PATH = _PATH_.resolve(opts.path);
 
     const files = GlobSync(PATH + '/**/*.tag', {
         ignore: opts.ignore ? PATH + opts.ignore : undefined

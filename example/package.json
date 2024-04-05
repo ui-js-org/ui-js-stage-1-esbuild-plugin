@@ -31,7 +31,7 @@
     "@ui.js.org/ui-js-stage-1-esbuild-plugin": "^0.0.11"
   },
   "dependencies": {
-    "@ui.js.org/ui": "^0.7.7"
+    "@ui.js.org/ui": "^0.7.8"
   },
   "bugs": {
     "url": "https://github.com/ui-js-org/ui-js-stage-1-esbuild-plugin/issues"

@@ -11,6 +11,9 @@ const { compile, VERSION } = require('@ui.js.org/ui');
 
 const uiPlugin = async (opts) => {
 
+
+    const noAsyncFunc = opts.noAsyncFunc;
+
     const namespace = opts.namespace || 'ui.js-bundled-tags';
 
 
@@ -115,7 +118,7 @@ const uiPlugin = async (opts) => {
 
             build.onLoad({ filter: /.*/, namespace: `${namespace}-ns` },
                 () => ({
-                    contents: code,
+                    contents: noAsyncFunc ? code : `;(async () => {${code}})();`,
                     loader: 'js',
                 })
             );

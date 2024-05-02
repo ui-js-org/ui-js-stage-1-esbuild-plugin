@@ -55,6 +55,7 @@ const uiPlugin = async (opts) => {
                 keepName: tag.keepName,
                 nodePath: PATH,
                 BASE_URL: PATH,
+                nameSuffix: opts.nameSuffix || '',
                 nodeFetch: async (path) => {
                     if(path[0] === '/') {
                         try {

@@ -5,7 +5,8 @@ const { GlobSync } = require('glob');
 const { minimatch } = require('minimatch');
 const fs = require('fs').promises;
 
-const { compile, VERSION } = require('@ui.js.org/ui');
+//const { compile, VERSION } = require('@ui.js.org/ui');
+const { compile, VERSION } = require('../../i.js-dev/dist/ui.cjs.js');
 
 
 const uiPlugin = async (opts) => {
@@ -32,14 +33,19 @@ const uiPlugin = async (opts) => {
         tags.push({
             source,
             path,
+            returnName: opts.returnName ? minimatch(path, opts.returnName.name) : false,
             keepName: opts.keepName ? minimatch(path, opts.keepName) : false
         });
     }));
 
     var code = "const { customElement } = window['UIjs'];";
 
+
+    const tagList = [];
+
     try {
         for (const tag of tags) {
+
             const { name, compiled } = await compile({
                 source: tag.source,
                 path: tag.path,
@@ -67,10 +73,21 @@ const uiPlugin = async (opts) => {
 
                     throw `nodeFetch: ${PATH+' '+path} unknown issue!`;
                 }
-            });
+            }, tagList);
             console.log(`ui.js compile: ${tag.path} | <${name}>`);
-            code += compiled + "\n";
+            //console.log('-------------------------------------------------------');
+
+            if(!tagList.includes(name)) {
+                code += compiled + "\n";
+                tagList.push(name);
+            } else {
+            //    console.log('Skip', name)
+            }
+
+            if(tag.returnName) opts.returnName.name = name;
+
         }
+
         console.log('ui.js compile done.');
         console.log('👌👌👌👌👌👌👌');
         console.log('☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️');

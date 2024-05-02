@@ -1,10 +1,10 @@
 {
   "name": "@ui.js.org/ui-js-stage-1-esbuild-plugin",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "ui.js stage 1 experimental tags bundling with esbuild",
   "main": "ui-js-esbuild-plugin.js",
   "dependencies": {
-    "@ui.js.org/ui": "^0.7.9",
+    "@ui.js.org/ui": "^0.7.10",
     "esbuild": "^0.20.1",
     "glob": "^8.1.0",
     "minimatch": "^9.0.3"

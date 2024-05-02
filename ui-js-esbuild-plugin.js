@@ -11,7 +11,6 @@ const { compile, VERSION } = require('@ui.js.org/ui');
 
 const uiPlugin = async (opts) => {
 
-
     const noAsyncFunc = opts.noAsyncFunc;
 
     const namespace = opts.namespace || 'ui.js-bundled-tags';
@@ -106,7 +105,9 @@ const uiPlugin = async (opts) => {
     //console.log(code)
     //console.log('---------------------------------------------------------')
 
-
+    if(opts.returnName && opts.returnName.fn) {
+        code = opts.returnName.fn(code, opts.returnName.name);
+    }
 
     return {
         name: namespace,

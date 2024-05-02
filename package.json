@@ -1,6 +1,6 @@
 {
   "name": "@ui.js.org/ui-js-stage-1-esbuild-plugin",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "ui.js stage 1 experimental tags bundling with esbuild",
   "main": "ui-js-esbuild-plugin.js",
   "dependencies": {

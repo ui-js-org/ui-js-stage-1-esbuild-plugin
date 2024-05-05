@@ -8,7 +8,6 @@ const fs = require('fs').promises;
 const { compile, VERSION } = require('@ui.js.org/ui');
 
 
-
 const uiPlugin = async (opts) => {
 
     const noAsyncFunc = opts.noAsyncFunc;
@@ -54,6 +53,7 @@ const uiPlugin = async (opts) => {
                 keepName: tag.keepName,
                 nodePath: PATH,
                 BASE_URL: PATH,
+                microfrontend: !!tag.returnName,
                 nameSuffix: opts.nameSuffix || '',
                 nodeFetch: async (path) => {
                     if(path[0] === '/') {

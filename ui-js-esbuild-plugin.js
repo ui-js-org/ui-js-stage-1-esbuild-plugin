@@ -6,6 +6,7 @@ const { minimatch } = require('minimatch');
 const fs = require('fs').promises;
 
 const { compile, VERSION } = require('@ui.js.org/ui');
+//const { compile, VERSION } = require('../i.js-dev/dist/ui.cjs.js');
 
 
 const uiPlugin = async (opts) => {
